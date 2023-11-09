@@ -28,12 +28,23 @@ public class UserService {
 
     @GetMapping(value = "/users/{id}")    //se pone con llaves el id xq va a ser una variable, le puedo poner el numero de id que necesite
     public User getUserById(Long id){
-        User user = repository.findById(id).get();
+        User user = repository.findById(id).get();  //con el .get, obtengo la entidad y si no la encuentra, me devuelve un null
         return user;
     }
 
     //public UserDto createUser (UserDto user) {
        // List <User> users = repository.save(user);
         //return user;
+
+
+    public String deleteUser (Long id) {
+        if (repository.existsById(id)) {
+            repository.delete(id);
+
+
+        }
+        return "el usuario " + "ha sido eliminiado";
+
+    }
     }
 

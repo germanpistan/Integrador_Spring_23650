@@ -5,6 +5,8 @@ import com.ar.cac.tpfinal.entities.User;
 import com.ar.cac.tpfinal.entities.dtos.UserDto;
 import com.ar.cac.tpfinal.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -66,7 +68,9 @@ public class UserController {
 
 
     //eliminar un usuario
-    public void deleteUser(){
+    @DeleteMapping (value = "/users/{id}")
+    public void deleteUser (@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.deleteUser(id));
 
     }
 
