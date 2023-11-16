@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 public class UserService {
-    @Autowired
+
     private UserRepository repository;
 
     public UserService (UserRepository repository) {
@@ -29,7 +29,8 @@ public class UserService {
 
     @GetMapping(value = "/users/{id}")    //se pone con llaves el id xq va a ser una variable, le puedo poner el numero de id que necesite
     public User getUserById(Long id){
-        User user = repository.findById(id).get();  //con el .get, obtengo la entidad y si no la encuentra, me devuelve un null
+        User user = repository.findById(id).get();//con el .get, obtengo la entidad y si no la encuentra, me devuelve un null
+        user.setPassword("******");
         return user;
     }
 
@@ -39,6 +40,17 @@ public class UserService {
         user = UserMapper.userToDto(entitySaved);
         user.setPassword("******");
         return user;
+
+    }
+
+    public String deleteUser (Long id){
+        if (repository.existsById(id)){
+            repository.deleteById(id);
+            return "El usuario  " + "ha sido eliminado";
+        } else {
+            return "El usuario con id: " + id + " , no ha sido eliminado";
+        }
+
 
     }
 

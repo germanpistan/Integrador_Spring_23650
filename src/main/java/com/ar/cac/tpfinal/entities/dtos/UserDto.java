@@ -16,12 +16,11 @@ public class UserDto {
     private Long id;
     private String username;
     private String password;
-    private int dni;
+    private String dni;
     private String address;
     private Date birthday_date;
     private String email;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
-
 
 }

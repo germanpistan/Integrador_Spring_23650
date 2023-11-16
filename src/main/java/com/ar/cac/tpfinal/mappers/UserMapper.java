@@ -11,10 +11,10 @@ public class UserMapper {
         User user = new User();
         user.setUsername((dto.getUsername()));
         user.setPassword((dto.getPassword()));
-        //user.setAdress(dto.getAdress());
-        //user.setDni(dto.getDni);
+        user.setAddress((dto.getAddress()));
+        user.setDni(dto.getDni());
         user.setEmail(dto.getEmail());
-       // user.setBirthday_date(dto.getBirthday);
+        user.setBirthday_date(dto.getBirthday_date());
         user.setCreated_at(LocalDateTime.now());
         user.setUpdated_at(LocalDateTime.now());
         return user;
@@ -26,11 +26,11 @@ public class UserMapper {
         dto.setUsername(user.getUsername());
         dto.setPassword(user.getPassword());
         dto.setDni(user.getDni());
-        //dto.setAddress(user.getAddress());
+        dto.setAddress(user.getAddress());
         dto.setEmail(user.getEmail());
-       // dto.setBirthday_date(user.getBirthday);
-       // dto.setCreated_at(user.getCreatedAt());
-      //  dto.setUpdated_at(user.getUpdatedAt());
+        dto.setBirthday_date(user.getBirthday_date());
+        dto.setCreated_at(user.getCreated_at());
+        dto.setUpdated_at(user.getUpdated_at());
         return dto;
     }
 }

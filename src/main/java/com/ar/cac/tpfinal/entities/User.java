@@ -2,7 +2,9 @@ package com.ar.cac.tpfinal.entities;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -14,6 +16,8 @@ import java.util.List;
 //nombres de tablas en minuscula y plural
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -24,22 +28,23 @@ public class User {
 
     @Column( name = "contrasena")
     private String password;
-    private int dni;
-
 
     private String email;
+
+    private String dni;
+
     @Column (name = "direccion")
-    private String adress;
+    private String address;
+
     @Column (name ="fecha_cumpleanios")
     private Date birthday_date;
 
-    //fecha de creacion y modificacion (estado) de casa usuario
+    //fecha de creacion y modificacion (estado) de cada usuario
     // TODO REFACTOR
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
-    //TO DO REFACTOR
-    //private List<Account> accountList;
-
+    //TODO REFACTOR
+    //private List<Account> accounts;
 
 }

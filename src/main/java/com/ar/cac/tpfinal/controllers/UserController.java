@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/api")  //es para agregar el /api en la request
+@RequestMapping ("/api/users")  //es para agregar el /api en la request
 public class UserController {
     //Inyeccion de dependencias: otorgar al framework la creacion y asignacion de un bean o objeto especial a una clase que necesita eso. controller, service y repository
     //Por cada metodo/accion HTTP que quiera permitir
@@ -28,40 +28,43 @@ public class UserController {
     @Autowired   //con esta anotacion el framework ya se encargo de crear una instancia de esta clase y setearla dentro de la variable service
     private UserService service;
 
-
-
     //obtener una lista de usuarios registrados
-    @GetMapping(value = "/users")  //esto es para que especificamente se ejecute ese metodo cuando pongo /api/users
+    @GetMapping  //esto es para que especificamente se ejecute ese metodo cuando pongo /api/users
     public ResponseEntity <List<User>> getUsers() {
         return ResponseEntity.status(HttpStatus.OK).body(service.getUsers());
     }
 
     //Path variable es la ultima parte del endpoint que es variable
     //obtener la informacion de un solo usuario
-    @GetMapping(value = "/users/{id}")    //se pone con llaves el id xq va a ser una variable, le puedo poner el numero de id que necesite
+    @GetMapping(value = "/{id}")    //se pone con llaves el id xq va a ser una variable, le puedo poner el numero de id que necesite
     public ResponseEntity <User> getUserById(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(service.getUserById(id));
     }
 
     //crear o registrar un usuario
-    @PostMapping (value = "/users")
+    @PostMapping
     public ResponseEntity <UserDto> createUser (@RequestBody UserDto user){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createUser(user));
     }
 
     //modificar TOTALMENTE un usuario  (PUT)
-
+    @PutMapping (value = "/{id}")
     public String updateUser(){
         return "";
     }
 
     //modificar PARCIALMENTE un usuario (PATCH)
+    @PatchMapping  (value = "/{id}")
     public String updateParcialUser(){
         return "";
     }
 
 
     //eliminar un usuario
+    @DeleteMapping (value = "/{id}")
+    public ResponseEntity <String> deleteUser(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.deleteUser(id));
+    }
 
 
 
