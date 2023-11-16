@@ -26,34 +26,28 @@ public class UserController {
 
     //necesito obtener una instancia del servicio de usuarios
     @Autowired   //con esta anotacion el framework ya se encargo de crear una instancia de esta clase y setearla dentro de la variable service
-    private final UserService service;
+    private UserService service;
 
-    public UserController (UserService service) {
-        this.service = service;
-    }
 
 
     //obtener una lista de usuarios registrados
     @GetMapping(value = "/users")  //esto es para que especificamente se ejecute ese metodo cuando pongo /api/users
-    public List<User> getUsers() {
-        return service.getUsers();
-        //return List.of("Cristian", "German","Maria", "Emilia", "Jorge");
-
+    public ResponseEntity <List<User>> getUsers() {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getUsers());
     }
+
     //Path variable es la ultima parte del endpoint que es variable
     //obtener la informacion de un solo usuario
     @GetMapping(value = "/users/{id}")    //se pone con llaves el id xq va a ser una variable, le puedo poner el numero de id que necesite
-    public User getUserById(@PathVariable Long id){
-        //return "German";
-        return service.getUserById(id);
+    public ResponseEntity <User> getUserById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.getUserById(id));
     }
 
     //crear o registrar un usuario
-    //@PostMapping (value = "/users")
-    //public UserDto createUser ( @RequestBody UserDto user){
-        //return service.createUser(user);
-
-    //}
+    @PostMapping (value = "/users")
+    public ResponseEntity <UserDto> createUser (@RequestBody UserDto user){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createUser(user));
+    }
 
     //modificar TOTALMENTE un usuario  (PUT)
 
@@ -68,11 +62,7 @@ public class UserController {
 
 
     //eliminar un usuario
-    @DeleteMapping (value = "/users/{id}")
-    public void deleteUser (@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.deleteUser(id));
 
-    }
 
 
 }

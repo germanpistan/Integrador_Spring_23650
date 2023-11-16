@@ -2,6 +2,7 @@ package com.ar.cac.tpfinal.entities.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -9,8 +10,10 @@ import java.util.Date;
 
 @Getter
 @Setter  //para ahorrarme hacer los getters y setters
-@AllArgsConstructor   //para constructor implicito
+@AllArgsConstructor
+@NoArgsConstructor //para constructor implicito
 public class UserDto {
+    private Long id;
     private String username;
     private String password;
     private int dni;
@@ -21,10 +24,4 @@ public class UserDto {
     private LocalDateTime updated_at;
 
 
-
-
-
-    public UserDto() {
-
-    }
 }
